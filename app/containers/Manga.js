@@ -48,7 +48,9 @@ export default class DetailsContainer extends Component {
               <List>
                 {
                   details.chapters && details.chapters.map(chapter => (
-                    <ListItem primaryText={chapter[2]}
+                    <ListItem
+                      key={chapter[3]}
+                      primaryText={chapter[2]}
                       leftIcon={<FontIcon className='material-icons'>bookmark</FontIcon>}
                       secondaryText={new Date(chapter[1] * 1000).toLocaleDateString()}
                       />
@@ -68,8 +70,6 @@ export function mapStateToProps(state) {
     isFetching,
     details
   } = state.manga;
-
-  console.log(state.manga)
 
   return {
     isFetching,
