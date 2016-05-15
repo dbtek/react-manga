@@ -19,6 +19,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 import App from './App';
 import List from './List';
+import Manga from './Manga';
 
 export default class Root extends Component {
   render() {
@@ -27,6 +28,7 @@ export default class Root extends Component {
         <Router history={history}>
           <Route path="/" component={App}>
             <Route path="/list" component={List}/>
+            <Route path="/details/:id" component={Manga}/>
           </Route>
         </Router>
       </Provider>

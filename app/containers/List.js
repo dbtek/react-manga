@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import { Link } from 'react-router';
 
 import { fetchList, changePage } from '../actions';
 
@@ -46,7 +48,9 @@ export default class ListContainer extends Component {
                     <img style={{width: 200, maxHeight: 300}} src={`https://cdn.mangaeden.com/mangasimg/${item.im}`} />
                   </CardMedia>
                   <CardActions>
-                    <FlatButton label="Chapters" />
+                    <Link to={`/details/${item.i}`}>
+                      <FlatButton label="Chapters" />
+                    </Link>
                   </CardActions>
                 </Card>
               ))
