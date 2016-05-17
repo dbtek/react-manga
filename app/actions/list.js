@@ -8,21 +8,21 @@ import {
 export function fetchList({ langId } = {
   langId: 0
 }) {
-  return (dispatch, getState) => {
-    dispatch({type: REQUEST_LIST})
-      let state = getState();
-      get(`list/${langId}`, {
-        p: state.list.page,
-        l: state.list.itemsPerPage
-      })
-      .then(json => dispatch({
-        type: RECEIVE_LIST,
-        list: json.manga,
-        total: json.total,
-        start: json.start,
-        end: json.end,
-        savedAt: Date.now()
-      }));
+  return async (dispatch, getState) => {
+    dispatch({type: REQUEST_LIST});
+    let state = getState();
+    const json = await get(`lsst/${langId}`, {
+      p: state.list.page,
+      l: state.list.itemsPerPage
+    });
+    dispatch({
+      type: RECEIVE_LIST,
+      list: json.manga,
+      total: json.total,
+      start: json.start,
+      end: json.end,
+      savedAt: Date.now()
+    });
   }
 }
 
