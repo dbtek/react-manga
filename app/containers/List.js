@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
@@ -22,14 +23,17 @@ export default class ListContainer extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, params } = this.props;
+    // set current page then fetch list
+    dispatch(changePage(params.page - 1 || 1));
     dispatch(fetchList());
   }
 
   handlePageClick(data) {
     const { dispatch } = this.props;
+    dispatch(push(`/list/${data.selected + 1}`));
     // change current page then fetch list
-    dispatch(changePage(data.selected))
+    dispatch(changePage(data.selected));
     dispatch(fetchList());
   }
 

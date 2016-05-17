@@ -28,6 +28,7 @@ export default class Root extends Component {
         <Router history={history}>
           <Route path="/" component={App}>
             <Route path="/list" component={List}/>
+            <Route path="/list/:page" component={List}/>
             <Route path="/details/:id" component={Manga}/>
           </Route>
         </Router>
