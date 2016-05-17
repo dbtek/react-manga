@@ -11,7 +11,7 @@ export function fetchList({ langId } = {
   return async (dispatch, getState) => {
     dispatch({type: REQUEST_LIST});
     let state = getState();
-    const json = await get(`lsst/${langId}`, {
+    const json = await get(`list/${langId}`, {
       p: state.list.page,
       l: state.list.itemsPerPage
     });
