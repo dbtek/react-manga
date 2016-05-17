@@ -44,6 +44,7 @@ export default class DetailsContainer extends Component {
             <CardText>
               <p>{details.description}</p>
             </CardText>
+            <CardTitle title="Chapters"/>
             <CardText>
               <List>
                 {
