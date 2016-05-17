@@ -1,3 +1,8 @@
+/**
+ * A resource module to interact with REST api. Exports get, save, udpate, remove methods.
+ */
+
+// Api base url.
 const apiUrl = 'https://www.mangaeden.com/api/';
 
 function serialize(obj) {
@@ -9,46 +14,61 @@ function serialize(obj) {
   return str.join("&");
 }
 
+/**
+ * Higher level fetch method. Deals with status code checks.
+ * @param  {String} url  Resource url
+ * @param  {Object} opts fetch options.
+ * @return {Promise}     Response promise.
+ */
+let _fetch = async function(url, opts) {
+  try {
+    const response = await fetch(url, opts);
+    if(response.status == 200)
+      return response;
+    else
+      throw new Error(`Probably bad request, status: ${response.status}.`);
+  }
+  catch (e) {
+    console.error(`An error occured while fetching ${url}`, e.stack);
+  }
+};
+
 // fetches an endpoint
-export function get(endpoint, params) {
+export async function get(endpoint, params) {
   let serializedParams = '';
   if(params)
     serializedParams = '?' + serialize(params);
-  return fetch(`${apiUrl}/${endpoint}${serializedParams}`)
-    .then(response => response.json());
+  const response = await _fetch(`${apiUrl}/${endpoint}${serializedParams}`);
+  return await response.json();
 }
 
 // creates a new model record
-export function save(endpoint, data) {
+export async function save(endpoint, data) {
   let method = 'POST'; // default method
   if(data.id) { // change method to PUT if there is an id in object
     method = 'PUT';
   }
-  return fetch(`${apiUrl}/${endpoint}`, {
+  const response = await _fetch(`${apiUrl}/${endpoint}`, {
       method: method,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify(data)
     })
-    .then(response => response.json());
+  return await response.json();
 }
 
 // updates an existing record
-export function update(endpoint, data) {
-  return fetch(`${apiUrl}/${endpoint}`, {
+export async function update(endpoint, data) {
+  const response = await _fetch(`${apiUrl}/${endpoint}`, {
       method: 'PUT',
       body: data
     })
-    .then(response => response.json());
+  return await response.json();
 }
 
 // deletes an existing record
-export function remove(endpoint) {
-  return fetch(`${apiUrl}/${endpoint}`, {
+export async function remove(endpoint) {
+  const response = await _fetch(`${apiUrl}/${endpoint}`, {
       method: 'DELETE',
       body: data
     })
-    .then(response => response.json());
+  return await response.json();
 }
