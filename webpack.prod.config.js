@@ -11,6 +11,7 @@ var HotReloader = new webpack.HotModuleReplacementPlugin();
 
 module.exports = {
   entry: [
+    'babel-polyfill',
     './app/App.js'
   ],
   output: {
