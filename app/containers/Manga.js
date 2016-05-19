@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -54,6 +55,7 @@ export default class DetailsContainer extends Component {
                       primaryText={chapter[2]}
                       leftIcon={<FontIcon className='material-icons'>bookmark</FontIcon>}
                       secondaryText={new Date(chapter[1] * 1000).toLocaleDateString()}
+                      containerElement={<Link to={`/chapter/${chapter[3]}`}/>}
                       />
                   ))
                 }
