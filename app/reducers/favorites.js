@@ -29,17 +29,14 @@ function load() {
 }
 
 export default function favorites(state = load(), action) {
-  let newState;
+  let newState = Object.assign({}, state);
   switch (action.type) {
     case ADD_TO_FAVORITE:
-      newState = Object.assign({}, state);
       newState.items[action.manga.i] = action.manga;
       break;
     case REMOVE_FAVORITE:
       delete newState.items[action.manga.i];
       break;
-    default:
-      newState = state;
   }
 
   // persist state

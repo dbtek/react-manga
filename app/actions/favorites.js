@@ -20,14 +20,12 @@ export function addToFavorites(manga) {
 }
 /**
  * Action to remove a manga from favorites
- * @param  {Number} index Favorite index.
  * @param  {Object} manga Manga object.
  * @return {Object}       Action details.
  */
-export function removeFavorite(index, manga) {
+export function removeFavorite(manga) {
   return {
     type: REMOVE_FAVORITE,
     manga: manga,
-    index: index
   }
 }

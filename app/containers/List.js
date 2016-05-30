@@ -25,7 +25,8 @@ export default class ListContainer extends Component {
     items: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    favorites: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
@@ -45,7 +46,14 @@ export default class ListContainer extends Component {
 
   handleFavoriteClick(manga) {
     const { dispatch } = this.props;
-    dispatch(addToFavorites(manga));
+    if(this.isFavorite(manga))
+      dispatch(removeFavorite(manga));
+    else
+      dispatch(addToFavorites(manga));
+  }
+
+  isFavorite(manga) {
+    return this.props.favorites.hasOwnProperty(manga.i);
   }
 
   render() {
@@ -66,7 +74,9 @@ export default class ListContainer extends Component {
                       <FlatButton label="Chapters" />
                     </Link>
                     <IconButton onTouchTap={function(e) { that.handleFavoriteClick(item) }}>
-                      <FontIcon className="material-icons">favorite</FontIcon>
+                      <FontIcon className="material-icons">
+                        { this.isFavorite(item) ? 'favorite' : 'favorite_border' }
+                      </FontIcon>
                     </IconButton>
                   </CardActions>
                 </Card>
@@ -101,13 +111,18 @@ export function mapStateToProps(state) {
     total
   } = state.list;
 
+  const {
+    items: favorites
+  } = state.favorites
+
   return {
     items,
     isFetching,
     lastUpdated,
     page,
     itemsPerPage,
-    total
+    total,
+    favorites
   };
 }
 

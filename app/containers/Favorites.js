@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import { Link } from 'react-router';
-import { addToFavorites } from '../actions'
+import { removeFavorite } from '../actions'
 
 let that;
 export default class FavoritesContainer extends Component {
@@ -22,7 +22,7 @@ export default class FavoritesContainer extends Component {
 
   handleFavoriteClick(manga) {
     const { dispatch } = this.props;
-    dispatch(addToFavorites(manga));
+    dispatch(removeFavorite(manga));
   }
 
   renderItem(item) {
