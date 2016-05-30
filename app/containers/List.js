@@ -4,9 +4,15 @@ import { push } from 'react-router-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 import { Link } from 'react-router';
 
-import { fetchList, changePage } from '../actions';
+import {
+  fetchList,
+  changePage,
+  addToFavorites,
+  removeFavorite
+} from '../actions';
 
 import Pagination from 'react-paginate';
 
@@ -37,9 +43,14 @@ export default class ListContainer extends Component {
     dispatch(fetchList());
   }
 
+  handleFavoriteClick(manga) {
+    const { dispatch } = this.props;
+    dispatch(addToFavorites(manga));
+  }
+
   render() {
     const { items, isFetching, lastUpdated, page, total, itemsPerPage } = this.props;
-    console.log(Math.ceil(total / itemsPerPage));
+    const that = this;
     return (
       <div>
         {items.length > 0 &&
@@ -47,14 +58,16 @@ export default class ListContainer extends Component {
             {
               items && items.map(item => (
                 <Card style={{display: 'flex', width: 200, marginBottom: 10 }}>
-                  <CardMedia style={{height: 300, width: 200}} overlay={<CardTitle title={item.t} subtitle={item.c.join(', ')}/>}
-                  >
+                  <CardMedia style={{height: 300, width: 200}} overlay={<CardTitle title={item.t} subtitle={item.c.join(', ')}/>}>
                     <img style={{width: 200, maxHeight: 300}} src={`https://cdn.mangaeden.com/mangasimg/${item.im}`} />
                   </CardMedia>
                   <CardActions>
                     <Link to={`/details/${item.i}`}>
                       <FlatButton label="Chapters" />
                     </Link>
+                    <IconButton onTouchTap={function(e) { that.handleFavoriteClick(item) }}>
+                      <FontIcon className="material-icons">favorite</FontIcon>
+                    </IconButton>
                   </CardActions>
                 </Card>
               ))
