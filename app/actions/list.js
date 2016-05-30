@@ -28,20 +28,16 @@ export function fetchList({ langId } = {
 
 // change current page
 export function changePage(page) {
-  return (dispatch, getState) => {
-    dispatch({
-      type: CHANGE_PAGE,
-      page: page
-    });
+  return {
+    type: CHANGE_PAGE,
+    page: page
   };
 }
 
 // change number of items per page
 export function changeItemsPerPage(items) {
-  return (dispatch, getState) => {
-    dispatch({
-      type: CHANGE_ITEMS_PER_PAGE,
-      iemsPerPage: items
-    });
+  return {
+    type: CHANGE_ITEMS_PER_PAGE,
+    iemsPerPage: items
   };
 }

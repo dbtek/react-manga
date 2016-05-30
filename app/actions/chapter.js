@@ -17,10 +17,8 @@ export function fetchChapter(id) {
 }
 
 export function changeChapterPage(page) {
-  return (dispatch, getState) => {
-    dispatch({
-      type: CHANGE_CHAPTER_PAGE,
-      page: page
-    });
+  return {
+    type: CHANGE_CHAPTER_PAGE,
+    page: page
   }
 }
