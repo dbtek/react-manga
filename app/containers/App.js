@@ -14,6 +14,10 @@ class App extends Component {
               label: 'List',
               url: '/list',
               icon: 'list'
+            }, {
+              label: 'Favorites',
+              url: '/favorites',
+              icon: 'favorite'
             }]} />
           <div style={{marginLeft: 256, paddingTop: 5, paddingLeft: 24, paddingRight: 24}}>
             {this.props.children}

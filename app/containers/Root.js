@@ -21,6 +21,7 @@ import App from './App';
 import List from './List';
 import Manga from './Manga';
 import Chapter from './Chapter';
+import Favorites from './Favorites';
 
 export default class Root extends Component {
   render() {
@@ -33,6 +34,7 @@ export default class Root extends Component {
             <Route path="/details/:id" component={Manga}/>
             <Route path="/chapter/:id" component={Chapter}/>
             <Route path="/chapter/:id/:page" component={Chapter}/>
+            <Route path="/favorites" component={Favorites}/>
           </Route>
         </Router>
       </Provider>
