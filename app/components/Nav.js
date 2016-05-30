@@ -6,7 +6,10 @@ import FontIcon from 'material-ui/FontIcon';
 import { Link } from 'react-router';
 
 export default (props) => (
-  <Drawer open={props.open} style={{top: 64, paddingTop: 30}}>
+  <Drawer
+    open={props.open}
+    docked={true}
+    containerStyle={{top: 64, paddingTop: 30}}>
     {
       props.items.map(item => {
         if(item.icon)

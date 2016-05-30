@@ -1,16 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { AppBar } from 'material-ui';
 import Nav from '../components/Nav';
+import {
+  openDrawer, closeDrawer
+} from '../actions';
 
-class App extends Component {
+export class AppContainer extends Component {
+
+  static propTypes = {
+    drawerOpened: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired
+  }
+
+  handleNavMenuTap() {
+    let { dispatch, drawerOpened } = this.props
+    if(drawerOpened)
+      dispatch(closeDrawer());
+    else
+      dispatch(openDrawer());
+  }
+
   render() {
+    let { drawerOpened } = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div>
-          <AppBar title='RManga'/>
-          <Nav items={[{
+          <AppBar title='RManga'
+            onLeftIconButtonTouchTap={this.handleNavMenuTap.bind(this)}/>
+          <Nav open={drawerOpened} items={[{
               label: 'List',
               url: '/list',
               icon: 'list'
@@ -19,7 +39,7 @@ class App extends Component {
               url: '/favorites',
               icon: 'favorite'
             }]} />
-          <div style={{marginLeft: 256, paddingTop: 5, paddingLeft: 24, paddingRight: 24}}>
+          <div style={{paddingTop: 5, paddingLeft: 24, paddingRight: 24}}>
             {this.props.children}
           </div>
         </div>
@@ -28,4 +48,14 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  const {
+    drawerOpened
+  } = state.app;
+
+  return {
+    drawerOpened
+  };
+}
+
+export default connect(mapStateToProps)(AppContainer);
