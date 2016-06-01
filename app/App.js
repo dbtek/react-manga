@@ -1,3 +1,5 @@
+// import styles
+import './styles/style.scss';
 // import promise polyfill & fetch
 import {polyfill} from 'es6-promise';
 polyfill();

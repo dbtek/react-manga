@@ -88,13 +88,20 @@ export default class ListContainer extends Component {
         {/* Pagination */}
         <Pagination previousLabel={"previous"}
           nextLabel={"next"}
-          breakLabel={<a href="">...</a>}
+          breakClassName={"page-item"}
+          breakLabel={<a className="page-link" href="">...</a>}
           pageNum={Math.ceil(total / itemsPerPage)}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           clickCallback={this.handlePageClick.bind(this)}
           containerClassName={"pagination"}
+          pageClassName={"page-item"}
+          pageLinkClassName={"page-link"}
           subContainerClassName={"pages pagination"}
+          previousClassName={"page-item"}
+          previousLinkClassName={"page-link"}
+          nextClassName={"page-item"}
+          nextLinkClassName={"page-link"}
           activeClassName={"active"} />
       </div>
     )
