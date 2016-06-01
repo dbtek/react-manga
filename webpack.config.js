@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/app/index.html',
@@ -28,9 +29,19 @@ module.exports = {
         loader: 'react-hot!babel',
         include: __dirname + '/app'
       },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('css!sass?includePaths[]=./node_modules')
+      },
     ]
   },
-  plugins: [HTMLWebpackPluginConfig, HotReloader],
+  plugins: [
+    HTMLWebpackPluginConfig,
+    HotReloader,
+    new ExtractTextPlugin('/style.css', {
+      allChunks: true
+    })
+  ],
   devServer: {
     contentBase: __dirname + '/public',
     hot: true,
