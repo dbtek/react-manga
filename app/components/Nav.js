@@ -13,8 +13,8 @@ export default (props) => (
     {
       props.items.map(item => {
         if(item.icon)
-          return (<MenuItem key={item.url} containerElement={<Link to={item.url} />} leftIcon={<FontIcon className='material-icons'>{item.icon}</FontIcon>}>{item.label}</MenuItem>);
-        return (<MenuItem key={item.url} containerElement={<Link to={item.url} />}>{item.label}</MenuItem>);
+          return (<MenuItem key={item.url} onTouchTap={props.onItemTap} containerElement={<Link to={item.url} />} leftIcon={<FontIcon className='material-icons'>{item.icon}</FontIcon>}>{item.label}</MenuItem>);
+        return (<MenuItem key={item.url} onTouchTap={onItemTap} containerElement={<Link to={item.url} />}>{item.label}</MenuItem>);
       })
     }
   </Drawer>
