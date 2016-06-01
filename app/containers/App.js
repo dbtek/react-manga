@@ -23,10 +23,6 @@ export class AppContainer extends Component {
       dispatch(openDrawer());
   }
 
-  handleNavItemTap(e) {
-    console.log(e);
-  }
-
   render() {
     let { drawerOpened } = this.props
     return (
@@ -43,7 +39,7 @@ export class AppContainer extends Component {
               url: '/favorites',
               icon: 'favorite'
             }]}
-            onItemTap={this.handleNavItemTap}/>
+            onItemTap={this.handleNavMenuTap.bind(this)}/>
           <div style={{paddingTop: 5, paddingLeft: 24, paddingRight: 24}}>
             {this.props.children}
           </div>
