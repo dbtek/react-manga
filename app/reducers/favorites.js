@@ -32,9 +32,14 @@ export default function favorites(state = load(), action) {
   let newState = Object.assign({}, state);
   switch (action.type) {
     case ADD_TO_FAVORITE:
-      newState.items[action.manga.i] = action.manga;
+      let newItem = {};
+      newItem[action.manga.i] = action.manga;
+      newState = Object.assign({}, state, {
+        items: Object.assign({}, state.items, newItem),
+      });
       break;
     case REMOVE_FAVORITE:
+      newState.items = Object.assign({}, state.items);
       delete newState.items[action.manga.i];
       break;
   }
