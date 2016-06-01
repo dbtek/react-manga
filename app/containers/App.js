@@ -23,6 +23,10 @@ export class AppContainer extends Component {
       dispatch(openDrawer());
   }
 
+  handleNavItemTap(e) {
+    console.log(e);
+  }
+
   render() {
     let { drawerOpened } = this.props
     return (
@@ -31,14 +35,15 @@ export class AppContainer extends Component {
           <AppBar title='RManga'
             onLeftIconButtonTouchTap={this.handleNavMenuTap.bind(this)}/>
           <Nav open={drawerOpened} items={[{
-              label: 'List',
-              url: '/list',
-              icon: 'list'
+              label: 'Browse',
+              url: '/browse',
+              icon: 'search'
             }, {
               label: 'Favorites',
               url: '/favorites',
               icon: 'favorite'
-            }]} />
+            }]}
+            onItemTap={this.handleNavItemTap}/>
           <div style={{paddingTop: 5, paddingLeft: 24, paddingRight: 24}}>
             {this.props.children}
           </div>

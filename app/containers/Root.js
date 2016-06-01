@@ -28,9 +28,10 @@ export default class Root extends Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-          <Route path="/" component={App}>
-            <Route path="/list" component={List}/>
-            <Route path="/list/:page" component={List}/>
+          <Route component={App}>
+            <Route path="/" component={List}/>
+            <Route path="/browse" component={List}/>
+            <Route path="/browse/:page" component={List}/>
             <Route path="/details/:id" component={Manga}/>
             <Route path="/chapter/:id" component={Chapter}/>
             <Route path="/chapter/:id/:page" component={Chapter}/>

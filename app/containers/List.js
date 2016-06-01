@@ -38,7 +38,7 @@ export default class ListContainer extends Component {
 
   handlePageClick(data) {
     const { dispatch } = this.props;
-    dispatch(push(`/list/${data.selected + 1}`));
+    dispatch(push(`/browse/${data.selected + 1}`));
     // change current page then fetch list
     dispatch(changePage(data.selected));
     dispatch(fetchList());
