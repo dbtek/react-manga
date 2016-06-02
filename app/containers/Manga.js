@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
-import {List, ListItem} from 'material-ui/List';
+
+import MangaDetails from '../components/MangaDetails';
+import ChapterListItem from '../components/ChapterListItem';
 
 import { fetchManga } from '../actions';
 
@@ -30,38 +29,23 @@ export default class MangaContainer extends Component {
     return (
       <div className="container">
         { details && (
-          <Card>
-            <CardMedia overlay={<CardTitle title={details.title} subtitle={details.categories.join(', ')}/>}>
-              <div style={{
-                background: `url(https://cdn.mangaeden.com/mangasimg/${details.image}) no-repeat center center`,
-                backgroundSize: 'cover',
-                height: 300,
-                width: '100%',
-                textAlign: 'center'
-              }}>
-                <img src={`https://cdn.mangaeden.com/mangasimg/${details.image}`} style={{height: 300}} />
-              </div>
-            </CardMedia>
-            <CardText>
-              <p>{details.description}</p>
-            </CardText>
-            <CardTitle title="Chapters"/>
-            <CardText>
-              <List>
-                {
-                  details.chapters && details.chapters.map(chapter => (
-                    <ListItem
-                      key={chapter[3]}
-                      primaryText={chapter[2]}
-                      leftIcon={<FontIcon className='material-icons'>bookmark</FontIcon>}
-                      secondaryText={new Date(chapter[1] * 1000).toLocaleDateString()}
-                      containerElement={<Link to={`/chapter/${chapter[3]}`}/>}
-                      />
-                  ))
-                }
-              </List>
-            </CardText>
-          </Card>
+          <MangaDetails
+            title={details.title}
+            subtitle={details.categories.join(',')}
+            description={details.description}
+            imageUrl={`https://cdn.mangaeden.com/mangasimg/${details.image}`}
+            >
+            {
+              details.chapters && details.chapters.map(chapter => (
+                <ChapterListItem
+                  key={chapter[3]}
+                  title={chapter[2]}
+                  releasedAt={new Date(chapter[1] * 1000).toLocaleDateString()}
+                  containerElement={<Link to={`/chapter/${chapter[3]}`}/>}
+                  />
+              ))
+            }
+          </MangaDetails>
         )}
       </div>
     );
