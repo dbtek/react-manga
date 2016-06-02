@@ -3,7 +3,6 @@ import './styles/style.scss';
 // import promise polyfill & fetch
 import {polyfill} from 'es6-promise';
 polyfill();
-import 'whatwg-fetch';
 
 import React from 'react';
 import {render} from 'react-dom';

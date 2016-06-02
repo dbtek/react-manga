@@ -3,7 +3,8 @@
  */
 
 // Api base url.
-const apiUrl = 'https://www.mangaeden.com/api/';
+const apiUrl = 'https://www.mangaeden.com/api';
+import fetch from 'isomorphic-fetch';
 
 function serialize(obj) {
   var str = [];
@@ -39,6 +40,7 @@ export async function get(endpoint, params) {
   if(params)
     serializedParams = '?' + serialize(params);
   const response = await _fetch(`${apiUrl}/${endpoint}${serializedParams}`);
+
   return await response.json();
 }
 
