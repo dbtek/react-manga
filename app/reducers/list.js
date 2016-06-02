@@ -26,7 +26,7 @@ export default function list(state = {
         start: action.start,
         end: action.end,
         total: action.total,
-        lastUpdated: action.receivedAt
+        lastUpdated: action.savedAt
       });
 
     case CHANGE_PAGE:
