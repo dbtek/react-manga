@@ -38,6 +38,6 @@ export function changePage(page) {
 export function changeItemsPerPage(items) {
   return {
     type: CHANGE_ITEMS_PER_PAGE,
-    iemsPerPage: items
+    itemsPerPage: items
   };
 }
