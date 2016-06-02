@@ -8,7 +8,7 @@ import {List, ListItem} from 'material-ui/List';
 
 import { fetchManga } from '../actions';
 
-export default class DetailsContainer extends Component {
+export default class MangaContainer extends Component {
   constructor(props) {
     super(props);
   }
@@ -28,7 +28,7 @@ export default class DetailsContainer extends Component {
   render() {
     const { details } = this.props;
     return (
-      <div>
+      <div className="container">
         { details && (
           <Card>
             <CardMedia overlay={<CardTitle title={details.title} subtitle={details.categories.join(', ')}/>}>
@@ -80,4 +80,4 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(DetailsContainer);
+export default connect(mapStateToProps)(MangaContainer);

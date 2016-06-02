@@ -63,7 +63,7 @@ export default class ListContainer extends Component {
     const { items, isFetching, lastUpdated, page, total, itemsPerPage } = this.props;
     const that = this;
     return (
-      <div>
+      <div className="container">
         {items.length > 0 &&
           <div style={{ opacity: isFetching ? 0.5 : 1, flex: 1, flexDirection: 'row', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
             {

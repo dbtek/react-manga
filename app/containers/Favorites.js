@@ -53,7 +53,7 @@ export default class FavoritesContainer extends Component {
     const { items } = this.props;
 
     return (
-      <div>
+      <div className="container">
         {
           <div style={{ flex: 1, flexDirection: 'row', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
             {this.renderItems(items)}

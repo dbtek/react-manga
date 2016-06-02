@@ -42,7 +42,7 @@ export default class ChapterContainer extends Component {
   render() {
     const { images, page } = this.props;
     return (
-      <div>
+      <div className="container">
         <DropDownMenu value={page} onChange={this.handlePageChange.bind(this)}>
           {
             images && images.map((image, i) => (
