@@ -27,14 +27,19 @@ export default class ListContainer extends Component {
     favorites: PropTypes.object.isRequired,
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { dispatch, params } = this.props;
     // set current page then fetch list
     dispatch(changePage(params.page - 1 || 1));
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
     dispatch(fetchList());
   }
 
   handlePageClick(data) {
+    console.trace('test', data.selected)
     const { dispatch } = this.props;
     dispatch(push(`/browse/${data.selected + 1}`));
     // change current page then fetch list
@@ -61,6 +66,8 @@ export default class ListContainer extends Component {
 
   render() {
     const { items, isFetching, lastUpdated, page, total, itemsPerPage } = this.props;
+    if(page < 0)
+      return <span/>;
     const that = this;
     return (
       <div className="container">
@@ -85,7 +92,7 @@ export default class ListContainer extends Component {
         <Pagination previousLabel={"previous"}
           nextLabel={"next"}
           breakClassName={"page-item"}
-          breakLabel={<a className="page-link" href="">...</a>}
+          breakLabel={<a className="page-link">...</a>}
           pageNum={Math.ceil(total / itemsPerPage)}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
@@ -98,7 +105,8 @@ export default class ListContainer extends Component {
           previousLinkClassName={"page-link"}
           nextClassName={"page-item"}
           nextLinkClassName={"page-link"}
-          activeClassName={"active"} />
+          activeClassName={"active"}
+          initialSelected={page} />
       </div>
     )
   }

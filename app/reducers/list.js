@@ -6,7 +6,7 @@ import {
 export default function list(state = {
   isFetching: false,
   items: [],
-  page: 0,
+  page: -1,
   total: 0,
   start: 0,
   end: 0,
