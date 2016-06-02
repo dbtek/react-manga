@@ -30,7 +30,7 @@ export default class ListContainer extends Component {
   componentWillMount() {
     const { dispatch, params } = this.props;
     // set current page then fetch list
-    dispatch(changePage(params.page - 1 || 1));
+    dispatch(changePage(params.page - 1 || 0));
   }
 
   componentDidMount() {
