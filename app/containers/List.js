@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
 import { Link } from 'react-router';
+
+import ListItem from '../components/ListItem';
 
 import {
   fetchList,
@@ -44,12 +42,17 @@ export default class ListContainer extends Component {
     dispatch(fetchList());
   }
 
-  handleFavoriteClick(manga) {
+  handleFavoriteTap(manga) {
     const { dispatch } = this.props;
     if(this.isFavorite(manga))
       dispatch(removeFavorite(manga));
     else
       dispatch(addToFavorites(manga));
+  }
+
+  handleDetailsTap(manga) {
+    const { dispatch } = this.props;
+    dispatch(push(`/details/${manga.i}`));
   }
 
   isFavorite(manga) {
@@ -65,21 +68,14 @@ export default class ListContainer extends Component {
           <div style={{ opacity: isFetching ? 0.5 : 1, flex: 1, flexDirection: 'row', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
             {
               items && items.map(item => (
-                <Card style={{display: 'flex', width: 200, marginBottom: 10 }}>
-                  <CardMedia style={{height: 300, width: 200}} overlay={<CardTitle title={item.t} subtitle={item.c.join(', ')}/>}>
-                    <img style={{width: 200, maxHeight: 300}} src={`https://cdn.mangaeden.com/mangasimg/${item.im}`} />
-                  </CardMedia>
-                  <CardActions>
-                    <Link to={`/details/${item.i}`}>
-                      <FlatButton label="Chapters" />
-                    </Link>
-                    <IconButton onTouchTap={function(e) { that.handleFavoriteClick(item) }}>
-                      <FontIcon className="material-icons">
-                        { this.isFavorite(item) ? 'favorite' : 'favorite_border' }
-                      </FontIcon>
-                    </IconButton>
-                  </CardActions>
-                </Card>
+                <ListItem
+                  title={item.t}
+                  subtitle={item.c.join(', ')}
+                  imageUrl={`https://cdn.mangaeden.com/mangasimg/${item.im}`}
+                  onFavoriteTap={function(e) { that.handleFavoriteTap(item) } }
+                  onDetailsTap={function(e) { that.handleDetailsTap(item) } }
+                  isFavorite={this.isFavorite(item)}
+                  />
               ))
             }
           </div>

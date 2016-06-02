@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
 import { Link } from 'react-router';
+import ListItem from '../components/ListItem';
+
 import { removeFavorite } from '../actions'
 
 let that;
@@ -20,27 +18,26 @@ export default class FavoritesContainer extends Component {
     dispatch: PropTypes.func.isRequired
   }
 
-  handleFavoriteClick(manga) {
+  handleFavoriteTap(manga) {
     const { dispatch } = this.props;
     dispatch(removeFavorite(manga));
   }
 
+  handleDetailsTap(manga) {
+    const { dispatch } = this.props;
+    dispatch(push(`/details/${manga.i}`));
+  }
+
   renderItem(item) {
     return (
-      <Card key={item.i} style={{display: 'flex', width: 200, marginBottom: 10 }}>
-        <CardMedia style={{height: 300, width: 200}} overlay={<CardTitle title={item.t} subtitle={item.c.join(', ')}/>}
-        >
-          <img style={{width: 200, maxHeight: 300}} src={`https://cdn.mangaeden.com/mangasimg/${item.im}`} />
-        </CardMedia>
-        <CardActions>
-          <Link to={`/details/${item.i}`}>
-            <FlatButton label="Chapters" />
-          </Link>
-          <IconButton onTouchTap={function(e) { that.handleFavoriteClick(item) }}>
-            <FontIcon className="material-icons">favorite</FontIcon>
-          </IconButton>
-        </CardActions>
-      </Card>
+      <ListItem
+        title={item.t}
+        subtitle={item.c.join(', ')}
+        imageUrl={`https://cdn.mangaeden.com/mangasimg/${item.im}`}
+        onFavoriteTap={function(e) { that.handleFavoriteTap(item) } }
+        onDetailsTap={function(e) { that.handleDetailsTap(item) } }
+        isFavorite={true}
+        />
     )
   }
 
