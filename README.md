@@ -6,6 +6,7 @@ Simple app built on React with Redux consuming Mangaeden api. Based on [React St
 ## Technology
 - React (UI)
 - Redux (Data Flow)
+- React Router
 - Fetch Api (HTTP Requests)
 - Material UI (Prebuilt React components following Material Design spec)
 - Sass (With node-sass, Webpack Sass loader)
