@@ -5,10 +5,14 @@
 @import 'bootstrap/scss/pagination';
 
 ul.pagination {
+  font-family: 'Roboto';
   // workaround for lack of react-pagination's break className support, won't be needed after
   // https://github.com/AdeleD/react-paginate/pull/73 is fixed
   li.break {
     @extend .page-item;
+  }
+  .page-item {
+    cursor: pointer;
   }
 }
 
